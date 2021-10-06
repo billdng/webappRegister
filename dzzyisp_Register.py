@@ -1,9 +1,14 @@
 import requests
 import json
 import random
+import re
 
 i = int(0)
-num = int(input('你想批量注册的用户数量:'))
+num = int(input('批量注册的用户数量:'))
+
+#创建写入注册用户信息的文件
+f = open("save file path",'a+')
+
 while i < num:
     headers = {
 
@@ -13,9 +18,7 @@ while i < num:
 
     }
 
-
     #获取验证码
-
     url_Getcode='https://www.dzzyisp.com/index.php?m=member&c=checklogin&a=get_code&k=Wed%20Oct%2006%202021%2011%3A36%3A01%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)40000'    
 
     resp=requests.get(url=url_Getcode,headers=headers)
@@ -27,7 +30,6 @@ while i < num:
     code = jsonObj['MSG']['code']
     
     #注册用户信息
-
     user='HaCkEr'+str(random.randrange(10,1000000))
 
     passwd='123.com'
@@ -38,33 +40,33 @@ while i < num:
         'modelid':'10',
         'siteid':'1',
         'username':user,
-
         'password':passwd,
-
         'pwdconfirm':passwd,
         'email':email,
         'code':code,
-
         'dosubmit':'',
         'protocol':'1'
-
     }
 
-
     #批量注册
-
     url_Register='https://www.dzzyisp.com/index.php?m=member&c=index&a=register&siteid=1'
-
     resp1=requests.post(url_Register,data=data,headers=headers)
     print("username:"+str(user)+" passwd:"+str(passwd))
-    
-    #记录
-    f = open("C:\\Users\\Oringals\\Desktop\\register.txt",'a+')
-    f.write(user+'\n'+passwd+'\n')
-    i += 1
 
+    #获取注册页面信息
+    res = re.findall(r'<div class="msg">(.*?)！',resp1.text)
+    #print(res)
+    
+    #判断注册是否成功
+    if(str(res) == "['操作成功']"):
+        #记录
+        f.write("username:%s password:%s\n" %(user,passwd))
+        i += 1
+    else:
+        pass
 print('完成批量注册'+str(i)+'条')
 f.close()
+
    
  
 
