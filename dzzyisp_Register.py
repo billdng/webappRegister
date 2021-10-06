@@ -13,16 +13,16 @@ num = int(input('You want to create users amount(if you put 10,it will create 10
 def register():
     i = int(0)
     #创建写入注册用户信息的文件
-    f = open("FILE PATH",'a+')
+    f = open("C:\\Users\\Oringals\\Desktop\\register.txt",'a+')
 
     #自动化注册
     while i < num:
+        chars = 'abcdefghijklmnopqrstuvwxyz123456789'
         headers = {
 
             "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.47",
-
-            'cookie':'PHPSESSID=md65imf1d2av4k5497aaqj8jb6'
-
+            
+            'cookie':'PHPSESSID='+''.join(random.sample(chars,random.randint(26,26)))
         }
 
     #获取验证码
@@ -36,11 +36,9 @@ def register():
         code = jsonObj['MSG']['code']
         
     #注册用户信息
-        
-        char_user = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
-        user=''.join(random.sample(char_user,random.randint(3,30)))+str(random.randint(10,100000)) # ''.join()将列表中的内容转换成字符串
+        user=''.join(random.sample(chars,random.randint(3,30)))+str(random.randint(10,100000)) # ''.join()将列表中的内容转换成字符串
         passwd='123.com'
-        email=str(random.randint(100,2000000))+'@163.com'
+        email=str(random.randint(100,2000000))+'@'+str(random.randint(10,10000))+'.com'
         data ={
             'modelid':'10',
             'siteid':'1',
