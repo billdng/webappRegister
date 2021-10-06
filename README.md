@@ -7,3 +7,5 @@
 f=open('FILE PATH','a+')
 
 pip3 install -r requestment.txt
+
+![图片](https://user-images.githubusercontent.com/71026994/136239407-d5469ef5-4f7f-4792-8516-33cbe014ecd6.png)
