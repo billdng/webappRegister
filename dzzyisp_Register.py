@@ -13,7 +13,7 @@ num = int(input('You want to create users amount(if you put 10,it will create 10
 def register():
     i = int(0)
     #创建写入注册用户信息的文件
-    f = open("C:\\Users\\Oringals\\Desktop\\register.txt",'a+')
+    f = open("Your FILE PATH",'a+')
 
     #自动化注册
     while i < num:
