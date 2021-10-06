@@ -6,4 +6,4 @@
 使用前修改一下文件的保存路径
 f=open('FILE PATH','a+')
 
-pip install -r requestment.txt
+pip3 install -r requestment.txt
