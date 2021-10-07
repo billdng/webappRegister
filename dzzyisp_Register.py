@@ -65,7 +65,7 @@ def register():
         else:
             pass
     print('[pass]成功注册%d名用户' %(sub))
-    f.close()
+    #f.close()
 
 def thread():
     start = datetime.now()
