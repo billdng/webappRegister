@@ -31,7 +31,7 @@ def register():
         
     #注册用户信息
         user=''.join(random.sample(chars,random.randint(3,30)))+str(random.randint(10,100000)) # ''.join()将列表中的内容转换成字符串
-        passwd='123.com'
+        passwd=str(random.randint(1000000,1000000000))
         email=str(random.randint(100,2000000))+'@'+str(random.randint(10,10000))+'.com'
         data ={
             'modelid':'10',
